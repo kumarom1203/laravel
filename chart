@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chart</title>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript"> 
+	google.charts.load('current', {'packages':['imagelinechart']});
+</script>
+</head>
+<body>
+   <div id="linechart_material" style="width: 400px; height: 240px;"></div>
+
+
+<script type="text/javascript">
+	  
+     
+     
+	  
+	  google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart);
+  
+    function drawChart() 
+    {
+      
+       var data = new google.visualization.DataTable();
+       data.addColumn('string', 'Month');
+       data.addColumn('number', '');
+       $.ajax({url: "http://localhost:8000/api/getMonthWise", success: function(result)
+       {
+        
+       }});
+
+         data.addRows([['Jan, 18', 100], ['Feb, 18', 200], ['Mar, 18', 150], ['Apr, 18', 210], ['May, 18', 90], ['Jun, 18', 120], ['Jul, 18', 180], ['Aug, 18', 140], ['Sep, 18', 190], ['Oct, 18', 130], ['Nov, 18', 165], ['Dec, 18', 250]]);
+       var options = {
+        chart: {
+          title: 'REVENUE TRENDS',
+          subtitle: 'USD'
+        },
+        width: 900,
+        height: 500
+      };
+
+      var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+</script>
+</body>
+</html>
